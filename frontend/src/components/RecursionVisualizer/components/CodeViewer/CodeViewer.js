@@ -272,10 +272,7 @@ const CodeViewer = ({ functionName, isDarkMode }) => {
     <div className="h-full flex flex-col rounded-lg overflow-hidden">
       <div className={`flex justify-between items-center p-3 border-b
         ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-        <h2 className={`text-lg font-semibold
-          ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
-          Code Implementation
-        </h2>
+        
         <div className="flex items-center space-x-2">
           <select
             value={selectedLanguage}
