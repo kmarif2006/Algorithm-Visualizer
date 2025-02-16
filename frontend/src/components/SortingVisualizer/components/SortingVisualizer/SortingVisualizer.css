@@ -1,0 +1,198 @@
+.container {
+  min-height: 100vh;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.container.light {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.container.dark {
+  background: linear-gradient(to bottom right, #0f172a, #1e293b);
+  color: #e2e8f0;
+}
+
+.visualizer-container {
+  height: 50vh;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.container.light .visualizer-container {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.container.dark .visualizer-container {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.visualizer {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 1rem;
+}
+
+.array-bar {
+  flex: 1;
+  transition: height 0.3s ease, background-color 0.3s ease;
+  border-radius: 4px 4px 0 0;
+}
+
+.container.light .array-bar {
+  background: #3b82f6;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.2);
+}
+
+.container.dark .array-bar {
+  background: #60a5fa;
+  box-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+}
+
+/* Centered Header with enhanced styling */
+.container h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3rem;
+  margin: 2rem auto;
+  text-align: center;
+  background: linear-gradient(45deg, #60a5fa, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  max-width: 800px;
+  padding: 1rem;
+  position: relative;
+}
+
+/* Optional: Add a subtle underline effect */
+.container h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, #60a5fa, #3b82f6);
+  border-radius: 2px;
+}
+/* Stylish Buttons */
+.controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.controls button {
+  padding: 0.8rem 1.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.container.light .controls button {
+  background: #3b82f6;
+  border: none;
+  color: white;
+}
+
+.container.dark .controls button {
+  background: #3b82f6;
+  border: none;
+  color: white;
+}
+
+.controls button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.controls button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+/* Enhanced Sliders */
+.settings {
+  background: rgba(96, 165, 250, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+.settings label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  color: #60a5fa;
+  margin: 1rem;
+}
+
+.settings input[type="range"] {
+  -webkit-appearance: none;
+  width: 200px;
+  height: 6px;
+  background: rgba(96, 165, 250, 0.2);
+  border-radius: 3px;
+  margin: 0 1rem;
+}
+
+.settings input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #60a5fa;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+  transition: all 0.2s ease;
+}
+
+.settings input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+/* Stylish Input Field */
+.custom-array {
+  margin: 2rem auto;
+  max-width: 600px;
+  display: flex;
+  gap: 1rem;
+}
+
+.custom-array input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.container.light .custom-array input {
+  background: white;
+  border: 2px solid #e2e8f0;
+  color: #0f172a;
+}
+
+.container.dark .custom-array input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(96, 165, 250, 0.3);
+  color: #e2e8f0;
+}
+
+.custom-array input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+}

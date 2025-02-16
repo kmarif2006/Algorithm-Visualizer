@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import "./HomePage.css";
 
 const algorithms = [
   {
     name: "Recursion Visualizer",
     description: "Visualize recursive algorithms and understand their execution flow through interactive animations",
-    link: "https://recursion-visualizer-t53e.onrender.com",
+    path: "/recursion-visualizer",
     githubLink: "https://github.com/kmarif2006/Recursion-Visualizer",
-    image: "/image/recursion_image.png",
+    image: "/images/recursion_image.png",
     defaultIcon: "⟲"
   },
   {
     name: "Sorting Visualizer",
     description: "Interactive visualization of various sorting algorithms",
-    link: "https://sorting-visualizer-ncyx.onrender.com",
+    path: "/sorting-visualizer",
     githubLink: "https://github.com/kmarif2006/sorting-visualizer",
-    image: "/image/sorting_image.png",
+    image: "/images/sorting_image.png",
     defaultIcon: "⇅"
   }
 ];
@@ -99,14 +100,12 @@ export default function HomePage() {
               <h2 className="card-title">{algo.name}</h2>
               <p className="card-description">{algo.description}</p>
               <div className="button-container">
-                <a 
-                  href={algo.link} 
+                <Link 
+                  to={algo.path} 
                   className="card-button"
-                  target="_blank" 
-                  rel="noopener noreferrer"
                 >
                   <span>Open Visualizer</span>
-                </a>
+                </Link>
                 <a 
                   href={algo.githubLink} 
                   className="github-link" 

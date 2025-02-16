@@ -1,0 +1,41 @@
+/* ThemeToggle.css */
+
+.theme-toggle-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle-btn:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.icon-sun,
+.icon-moon {
+  width: 24px;
+  height: 24px;
+}
+
+.theme-toggle-btn:focus {
+  outline: none;
+}
+
+.theme-toggle-btn.dark {
+  background-color: #2a2a2a;
+  border-color: #555;
+}
+
+.theme-toggle-btn.dark .icon-sun {
+  color: #ffcc00;
+}
+
+.theme-toggle-btn.light .icon-moon {
+  color: #333;
+}
