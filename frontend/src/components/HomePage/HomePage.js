@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "./HomePage.css";
+import ThemeToggle from '../shared/ThemeToggler';
 
 const algorithms = [
   {
@@ -50,36 +51,30 @@ const GitHubIcon = () => (
 export default function HomePage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') ?? 'light';
+    if (savedTheme === 'dark') {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
+    if (!isDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
   };
 
   return (
     <div className={`home-container ${isDarkMode ? "dark-mode" : "light-mode"}`}>
+      <ThemeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleTheme} />
       <h1 className="header">Algorithm Visualizer</h1>
       <p className="sub-header">Interactive visualizations to help you understand algorithms better</p>
-
-      <button onClick={toggleTheme} className="theme-toggle">
-        {isDarkMode ? (
-          <svg className="sun-icon" fill="none" stroke="#60a5fa" viewBox="0 0 24 24" width="24" height="24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-            />
-          </svg>
-        ) : (
-          <svg className="moon-icon" fill="none" stroke="#0f172a" viewBox="0 0 24 24" width="24" height="24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-            />
-          </svg>
-        )}
-      </button>
 
       <div className="algorithms">
         {algorithms.map((algo, index) => (

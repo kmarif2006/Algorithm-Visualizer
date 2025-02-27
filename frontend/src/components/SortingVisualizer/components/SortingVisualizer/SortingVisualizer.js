@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ThemeToggle from '../../../shared/ThemeToggler';
 import "./SortingVisualizer.css";
 import { getBubbleSortAnimations } from "../../SortingAlgorithm/bubbleSort";
 import { getQuickSortAnimations } from "../../SortingAlgorithm/quickSort";
@@ -11,7 +12,8 @@ const PRIMARY_COLOR = "#3b82f6"; // Blue
 const SECONDARY_COLOR = "#ef4444"; // Red
 const SUCCESS_COLOR = "#22c55e"; // Green
 
-const SortingVisualizer = ({ isDarkMode }) => {
+const SortingVisualizer = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [array, setArray] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [maxValue, setMaxValue] = useState(1);
@@ -22,6 +24,25 @@ const SortingVisualizer = ({ isDarkMode }) => {
   useEffect(() => {
     generateNewArray();
   }, [arraySize]);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') ?? 'light';
+    if (savedTheme === 'dark') {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+    if (!isDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
 
   const generateNewArray = () => {
     const newArray = Array.from({ length: arraySize }, () =>
@@ -79,6 +100,7 @@ const SortingVisualizer = ({ isDarkMode }) => {
 
   return (
     <div className={`container ${isDarkMode ? "dark" : "light"}`}>
+      <ThemeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleTheme} />
       <h2>Sorting Algorithm Visualizer</h2>
 
       <div className="controls">

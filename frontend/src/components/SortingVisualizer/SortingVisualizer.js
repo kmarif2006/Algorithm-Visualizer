@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
+import ThemeToggle from "../shared/ThemeToggler";
 import SortingVisualizer from "./components/SortingVisualizer/SortingVisualizer";
 import "./App.css"; // Import the CSS file
 

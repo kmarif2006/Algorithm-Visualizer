@@ -3,7 +3,7 @@ import Header from './components/Header/Header';
 import Controls from './components/Controls/Controls';
 import TreeVisualization from './components/TreeVisualization/TreeVisualization';
 import ControlPanel from './components/Controls/ControlPanel';
-import ThemeToggle from './components/ThemeToggle/ThemeToggle';
+import ThemeToggle from '../shared/ThemeToggler';
 import CodeViewer from './components/CodeViewer/CodeViewer';
 import Resizer from './components/Resizer/Resizer';
 import { generateRecursionTree } from './Services/api';
