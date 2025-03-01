@@ -1,0 +1,28 @@
+# Node modules
+/node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+
+# Dependency directories
+/.pnp/
+/.pnp.js
+
+# Coverage reports
+/coverage/
+
+# IDE files
+.idea/
+/.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Other
+*.log
+*.bak
