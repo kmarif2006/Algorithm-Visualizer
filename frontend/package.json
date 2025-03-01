@@ -10,12 +10,13 @@
     "react-router-dom": "^7.1.5",
     "react-scripts": "5.0.1"
   },
-  "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "scripts": {
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+
   "eslintConfig": {
     "extends": [
       "react-app",
