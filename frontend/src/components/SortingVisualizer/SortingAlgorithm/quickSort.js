@@ -9,7 +9,7 @@ export function getQuickSortAnimations(array) {
   }
 
   function partition(arr, startIdx, endIdx) {
-    const pivotValue = arr[endIdx];
+    const pivotValue = arr[endIdx];//last element as pivot
     let pivotIdx = startIdx;
 
     for (let i = startIdx; i < endIdx; i++) {
