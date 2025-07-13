@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from './components/HomePage/HomePage';
+import HomePage from './components/HomePage';
 import RecursionVisualizer from './components/RecursionVisualizer/RecursionVisualizer';
 import SortingVisualizer from './components/SortingVisualizer/SortingVisualizer';
 import { useState, useEffect } from 'react';

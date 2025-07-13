@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = 'http://localhost:3001';
 
 export const generateRecursionTree = async (functionName, inputValue) => {
   try {
@@ -61,7 +61,7 @@ export const generateRecursionTree = async (functionName, inputValue) => {
 
     // console.log('Sending request:', { functionName, input: processedInput }); // Debug log
 
-    const response = await fetch(`${API_BASE_URL}/run-code`, {
+    const response = await fetch(`${API_BASE_URL}/visualizer`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

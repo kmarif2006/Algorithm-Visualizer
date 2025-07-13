@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import "./HomePage.css";
-import ThemeToggle from '../shared/ThemeToggler';
+import ThemeToggle from './shared/ThemeToggler';
 
 const algorithms = [
   {
@@ -24,22 +23,14 @@ const algorithms = [
 ];
 
 const DefaultImage = ({ icon }) => (
-  <div style={{
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '3rem',
-    color: '#60a5fa'
-  }}>
+  <div className="w-full h-full flex items-center justify-center text-3xl text-blue-400">
     {icon}
   </div>
 );
 
 const GitHubIcon = () => (
   <svg
-    className="github-icon"
+    className="w-4 h-4"
     viewBox="0 0 24 24"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
@@ -71,12 +62,25 @@ export default function HomePage() {
   };
 
   return (
-    <div className={`home-container ${isDarkMode ? "dark-mode" : "light-mode"}`}>
+    <div className={`min-h-screen flex flex-col items-center p-4 sm:p-6 text-center transition-all duration-300 ${
+      isDarkMode 
+        ? 'bg-gradient-to-br from-slate-900 to-slate-800 text-slate-200' 
+        : 'bg-slate-50 text-slate-900'
+    }`}>
       <ThemeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleTheme} />
-      <h1 className="header">Algorithm Visualizer</h1>
-      <p className="sub-header">Interactive visualizations to help you understand algorithms better</p>
+      
+      {/* Header */}
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 sm:mt-6 mb-2 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent tracking-wide relative">
+        Algorithm Visualizer
+        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-16 sm:w-20 md:w-24 h-0.5 sm:h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded"></div>
+      </h1>
+      
+      <p className="text-base sm:text-lg md:text-xl mt-4 sm:mt-6 mb-6 sm:mb-8 text-slate-500 dark:text-slate-400 px-4">
+        Interactive visualizations to help you understand algorithms better
+      </p>
 
-      <div className="algorithms">
+      {/* Algorithm Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mt-4 sm:mt-6 w-full max-w-4xl lg:max-w-5xl px-2 sm:px-4">
         {algorithms.map((algo, index) => (
           <motion.div
             key={index}
@@ -84,26 +88,50 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
           >
-            <div className="card">
-              <div className="image-container">
+            <div className={`h-full flex flex-col items-center p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
+              isDarkMode
+                ? 'bg-white/5 backdrop-blur-md border border-white/10 hover:shadow-slate-900/20'
+                : 'bg-white/90 shadow-md hover:shadow-xl'
+            }`}>
+              
+              {/* Image Container */}
+              <div className="w-full h-40 sm:h-48 md:h-60 rounded-lg sm:rounded-xl overflow-hidden mb-3 sm:mb-4 bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center p-2">
                 {algo.image ? (
-                  <img src={algo.image} alt={algo.name} className="card-image" />
+                  <img 
+                    src={algo.image} 
+                    alt={algo.name} 
+                    className="w-full h-full object-contain transition-transform duration-300 hover:scale-105" 
+                  />
                 ) : (
                   <DefaultImage icon={algo.defaultIcon} />
                 )}
               </div>
-              <h2 className="card-title">{algo.name}</h2>
-              <p className="card-description">{algo.description}</p>
-              <div className="button-container">
+              
+              {/* Card Title */}
+              <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-3 md:mb-4 text-blue-500">
+                {algo.name}
+              </h2>
+              
+              {/* Card Description */}
+              <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 leading-relaxed mb-4 sm:mb-5 md:mb-6 flex-grow px-2">
+                {algo.description}
+              </p>
+              
+              {/* Button Container */}
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 mt-auto w-full">
                 <Link 
                   to={algo.path} 
-                  className="card-button"
+                  className="px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-blue-600 text-white rounded-lg font-medium transition-all duration-300 hover:opacity-90 hover:scale-105 flex items-center justify-center gap-2 text-sm sm:text-base"
                 >
                   <span>Open Visualizer</span>
                 </Link>
                 <a 
                   href={algo.githubLink} 
-                  className="github-link" 
+                  className={`px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg font-medium transition-all duration-300 hover:opacity-90 hover:scale-105 flex items-center justify-center gap-2 text-sm sm:text-base ${
+                    isDarkMode
+                      ? 'bg-slate-700 text-white'
+                      : 'bg-slate-800 text-white'
+                  }`}
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
@@ -116,11 +144,12 @@ export default function HomePage() {
         ))}
       </div>
 
-      <footer className="footer">
+      {/* Footer */}
+      <footer className="mt-6 sm:mt-8 pt-4 sm:pt-6 text-sm sm:text-base text-slate-500 dark:text-slate-400">
         Built with 💙 by{" "}
         <a 
           href="https://github.com/kmarif2006" 
-          className="footer-link" 
+          className="text-blue-400 font-medium transition-colors duration-300 hover:text-blue-600" 
           target="_blank" 
           rel="noopener noreferrer"
         >
