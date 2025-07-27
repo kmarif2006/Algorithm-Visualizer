@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://algorithm-visualizer-backend-znhz.onrender.com';
 
 export const generateRecursionTree = async (functionName, inputValue) => {
   try {
