@@ -1,24 +1,29 @@
+import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import HomePage from './components/HomePage';
 import RecursionVisualizer from './components/RecursionVisualizer/RecursionVisualizer';
 import SortingVisualizer from './components/SortingVisualizer/SortingVisualizer';
-import { useState, useEffect } from 'react';
 import ThemeToggler from './components/shared/ThemeToggler';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // On mount, check for saved theme preference
   useEffect(() => {
-    // Check localStorage on initial load
-    const savedTheme = localStorage.getItem('theme') ?? 'light';
+    const savedTheme = localStorage.getItem('theme') || 'light';
     if (savedTheme === 'dark') {
-      setIsDarkMode(true);
       document.documentElement.classList.add('dark');
+      setIsDarkMode(true);
+    } else {
+      document.documentElement.classList.remove('dark');
+      setIsDarkMode(false);
     }
   }, []);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(prevMode => {
+  // Memoized toggle function to avoid re-renders
+  const toggleDarkMode = useCallback(() => {
+    setIsDarkMode((prevMode) => {
       const newMode = !prevMode;
       if (newMode) {
         document.documentElement.classList.add('dark');
@@ -29,19 +34,30 @@ function App() {
       }
       return newMode;
     });
-  };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
-      <ThemeToggler isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-      <BrowserRouter>
+    <BrowserRouter>
+      <div
+        className={`min-h-screen bg-white dark:bg-gray-900 text-slate-900 dark:text-slate-200 transition-colors duration-300`}
+        role="main"
+      >
+        <ThemeToggler isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+
         <Routes>
           <Route path="/" element={<HomePage isDarkMode={isDarkMode} />} />
-          <Route path="/recursion-visualizer" element={<RecursionVisualizer isDarkMode={isDarkMode} />} />
-          <Route path="/sorting-visualizer" element={<SortingVisualizer isDarkMode={isDarkMode} />} />
+          <Route
+            path="/recursion-visualizer"
+            element={<RecursionVisualizer isDarkMode={isDarkMode} />}
+          />
+          <Route
+            path="/sorting-visualizer"
+            element={<SortingVisualizer isDarkMode={isDarkMode} />}
+          />
+          {/* Add 404 or other routes as needed */}
         </Routes>
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
