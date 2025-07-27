@@ -8,7 +8,7 @@ const algorithms = [
     name: "Recursion Visualizer",
     description: "Visualize recursive algorithms and understand their execution flow through interactive animations",
     path: "/recursion-visualizer",
-    githubLink: "https://github.com/kmarif2006/Recursion-Visualizer",
+    githubLink: "https://github.com/kmarif2006/Algorithm-Visualizer",
     image: "/images/recursion_image.png",
     defaultIcon: "⟲"
   },
@@ -16,7 +16,7 @@ const algorithms = [
     name: "Sorting Visualizer",
     description: "Interactive visualization of various sorting algorithms",
     path: "/sorting-visualizer",
-    githubLink: "https://github.com/kmarif2006/sorting-visualizer",
+    githubLink: "https://github.com/kmarif2006/Algorithm-Visualizer",
     image: "/images/sorting_image.png",
     defaultIcon: "⇅"
   }
