@@ -71,7 +71,7 @@ const power = (base, exponent, animationStep = [], id = '0') => {
       id,
       name: `power(${base}, 0)`,
       value: 1,
-      explanation: `Base case: Any number raised to 0 equals 1`,
+      explanation: `Base case: Any number raised to ${exponent} equals 1`,
       children: [],
       isBaseCase: true
     };

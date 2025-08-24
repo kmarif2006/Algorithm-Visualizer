@@ -12,11 +12,7 @@ const PORT = process.env.PORT;
 const __dirname = path.resolve();
 
 // Enable CORS for all routes
-app.use(cors({
-  origin: 'http://localhost:3000',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+app.use(cors());
 
 // Parse incoming JSON requests
 app.use(express.json());
@@ -25,12 +21,12 @@ app.use(express.json());
 app.use('/visualizer', runCodeRouter);
 
 // Serve static files from React build
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+// app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // Fallback to index.html for SPA routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+// });
 
 // Start the server
 app.listen(PORT, () => {
