@@ -40,7 +40,7 @@ const factorial = (n, animationStep = [], id = '0') => {
       id,
       name: `fact(${n})`,
       value: 1,
-      explanation: `Base case: ${n}! = 1`,
+      explanation: `Base case: factorial(${n}) = 1`,
       children: [],
       isBaseCase: true
     };
@@ -55,7 +55,7 @@ const factorial = (n, animationStep = [], id = '0') => {
     id,
     name: `fact(${n})`,
     value: value,
-    explanation: `${n}! = ${n} × ${n-1}! = ${n} × ${child.value} = ${value}`,
+    explanation: `factorial(${n}): ${n} × factorial(${n-1}) = ${n} × ${child.value} = ${value}`,
     children: [child],
     isBaseCase: false
   };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { resetStates } from './utils';
 
 const TreeVisualization = ({ recursionData, setProgress, setCurrentMessage, currentStep, isDarkMode }) => {
