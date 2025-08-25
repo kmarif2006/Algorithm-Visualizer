@@ -124,36 +124,6 @@ const gcd = (a, b, animationStep = [], id = '0') => {
   animationStep.push(node);
   return node;
 };
-
-// Sum of digits implementation
-const sumDigits = (n, animationStep = [], id = '0') => {
-  if (n === 0) {
-    const node = {
-      id,
-      name: `sumDigits(${n}) = 0`,
-      value: 0,
-      children: [],
-      isBaseCase: true
-    };
-    animationStep.push(node);
-    return node;
-  }
-
-  const child = sumDigits(Math.floor(n / 10), animationStep, `${id}-0`);
-  const value = (n % 10) + child.value;
-  
-  const node = {
-    id,
-    name: `sumDigits(${n}) = ${value}`,
-    value: value,
-    children: [child],
-    isBaseCase: false
-  };
-  
-  animationStep.push(node);
-  return node;
-};
-
 // Binary Search with descriptive messages
 const binarySearch = (target, left, right, animationStep = [], id = '0') => {
   const mid = Math.floor((left + right) / 2);
@@ -321,12 +291,6 @@ router.post('/', (req, res) => {
           throw new Error('GCD inputs must be non-negative integers');
         }
         result = gcd(a, b, animationStep);
-        break;
-      }
-      case 'SumDigits': {
-        validateNumericInput(input);
-        const safeInput = Math.abs(input);
-        result = sumDigits(safeInput, animationStep);
         break;
       }
       case 'BinarySearch': {
