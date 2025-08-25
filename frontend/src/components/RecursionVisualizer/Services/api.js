@@ -78,7 +78,7 @@ export const generateRecursionTree = async (functionName, inputValue) => {
     }
     
     const data = await response.json();
-    console.log('Received response:', data); // Debug log
+    // console.log('Received response:', data); // Debug log
     return data;
   } catch (error) {
     console.error('API Error:', error);

@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import HomePage from './components/HomePage';
 import RecursionVisualizer from './components/RecursionVisualizer/RecursionVisualizer';
 import SortingVisualizer from './components/SortingVisualizer/SortingVisualizer';
 import ThemeToggler from './components/shared/ThemeToggler';
-
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-
   // On mount, check for saved theme preference
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'light';
@@ -54,7 +51,6 @@ function App() {
             path="/sorting-visualizer"
             element={<SortingVisualizer isDarkMode={isDarkMode} />}
           />
-          {/* Add 404 or other routes as needed */}
         </Routes>
       </div>
     </BrowserRouter>

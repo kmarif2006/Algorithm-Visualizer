@@ -262,9 +262,7 @@ const towerOfHanoi = (n, source = 'A', auxiliary = 'B', target = 'C', animationS
     id,
     name: `hanoi(${n})`,
     value: `Move ${n} disks: ${source} → ${target}`,
-    explanation: `1. Move ${n-1} disks from ${source} to ${auxiliary}
-2. Move disk ${n} from ${source} to ${target}
-3. Move ${n-1} disks from ${auxiliary} to ${target}`,
+    explanation: `1. Move ${n-1} disks from ${source} to ${auxiliary} 2. Move disk ${n} from ${source} to ${target} 3. Move ${n-1} disks from ${auxiliary} to ${target}`,
     children: [child1, moveCurrentDisk, child2],
     isBaseCase: false
   };
@@ -277,23 +275,25 @@ router.post('/', (req, res) => {
   try {
     const { functionName, input } = req.body;
     
-    console.log('Received request:', { functionName, input }); // Debug log
+    // console.log('Received request:', { functionName, input }); // Debug log
     
     if (!functionName || input === undefined) {
       throw new Error('Missing required parameters');
     }
 
     let result;
-    const animationStep = [];
+    let animationStep = [];
 
     switch (functionName) {
       case 'Fibonacci': {
         validateNumericInput(input);
+        if(input<0)throw new Error('Fibonacci input must be non-negative');
         result = fibonacci(input, animationStep);
         break;
       }
       case 'Factorial': {
         validateNumericInput(input);
+        if(input<0)throw new Error('Fibonacci input must be non-negative');
         result = factorial(input, animationStep);
         break;
       }
@@ -304,6 +304,9 @@ router.post('/', (req, res) => {
         const [base, exponent] = input;
         validateNumericInput(base);
         validateNumericInput(exponent);
+        if (exponent < 0) {
+          throw new Error('Negative exponents are not supported in recursive implementation');
+        }
         result = power(base, exponent, animationStep);
         break;
       }
@@ -314,12 +317,16 @@ router.post('/', (req, res) => {
         const [a, b] = input;
         validateNumericInput(a);
         validateNumericInput(b);
+        if (a < 0 || b < 0) {
+          throw new Error('GCD inputs must be non-negative integers');
+        }
         result = gcd(a, b, animationStep);
         break;
       }
       case 'SumDigits': {
         validateNumericInput(input);
-        result = sumDigits(input, animationStep);
+        const safeInput = Math.abs(input);
+        result = sumDigits(safeInput, animationStep);
         break;
       }
       case 'BinarySearch': {
@@ -329,12 +336,21 @@ router.post('/', (req, res) => {
         const [target, max] = input;
         validateNumericInput(target);
         validateNumericInput(max);
+         if (target < 0 || max < 0) {
+          throw new Error('Binary Search requires non-negative integers');
+        }
+        if (target > max) {
+          throw new Error(`Target ${target} cannot be greater than max value ${max}`);
+        }
         result = binarySearch(target, 0, max, animationStep);
         break;
       }
       case 'ArraySum': {
         if (!Array.isArray(input)) {
           throw new Error('Array Sum requires an array of numbers');
+        }
+        if (input.length === 0) {
+          throw new Error('Array Sum requires at least one element');
         }
         input.forEach(validateNumericInput);
         result = arraySum(input, 0, animationStep);
@@ -354,7 +370,7 @@ router.post('/', (req, res) => {
         throw new Error(`Unsupported function: ${functionName}`);
     }
     
-    console.log('Sending response:', result); // Debug log
+    // console.log('Sending response:', result); // Debug log
     res.json(result);
   } catch (error) {
     console.error('Backend Error:', error);

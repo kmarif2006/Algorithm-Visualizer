@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Header = ({ isDarkMode }) => {
   return (
     <h1 className={`text-4xl font-semibold text-center mb-8 
