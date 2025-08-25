@@ -45,12 +45,12 @@ const ControlPanel = ({ progress, currentMessage }) => {
         </div>
       </div>
 
-      {/* Message display */}
+      {/* Message display
       <div className="w-full text-center">
         <p className={`text-sm font-medium transition-colors duration-300 ${getMessageColor()}`}>
           {getProgressMessage()}
         </p>
-      </div>
+      </div> */}
     </div>
   );
 };

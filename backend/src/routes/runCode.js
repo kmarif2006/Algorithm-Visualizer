@@ -1,14 +1,14 @@
 import express from 'express';
 const router = express.Router();
 
-// Fibonacci implementation with descriptive messages
+// Fibonacci with descriptive explanation
 const fibonacci = (n, animationStep = [], id = '0') => {
   if (n <= 1) {
     const node = {
       id,
       name: `fib(${n})`,
       value: n,
-      explanation: `Base case: fib(${n}) = ${n}`,
+      explanation: `Base case reached: fib(${n}) = ${n}`,
       children: [],
       isBaseCase: true
     };
@@ -23,8 +23,8 @@ const fibonacci = (n, animationStep = [], id = '0') => {
   const node = {
     id,
     name: `fib(${n})`,
-    value: value,
-    explanation: `fib(${n}) = fib(${n-1}) + fib(${n-2}) = ${left.value} + ${right.value} = ${value}`,
+    value,
+    explanation: `Recursive step: fib(${n}) = fib(${n-1}) + fib(${n-2}) = ${left.value} + ${right.value} = ${value}`,
     children: [left, right],
     isBaseCase: false
   };
@@ -33,14 +33,14 @@ const fibonacci = (n, animationStep = [], id = '0') => {
   return node;
 };
 
-// Factorial implementation with descriptive messages
+// Factorial with descriptive explanation
 const factorial = (n, animationStep = [], id = '0') => {
   if (n === 0 || n === 1) {
     const node = {
       id,
       name: `fact(${n})`,
       value: 1,
-      explanation: `Base case: factorial(${n}) = 1`,
+      explanation: `Base case reached: factorial(${n}) = 1`,
       children: [],
       isBaseCase: true
     };
@@ -54,8 +54,8 @@ const factorial = (n, animationStep = [], id = '0') => {
   const node = {
     id,
     name: `fact(${n})`,
-    value: value,
-    explanation: `factorial(${n}): ${n} × factorial(${n-1}) = ${n} × ${child.value} = ${value}`,
+    value,
+    explanation: `Recursive step: factorial(${n}) = ${n} × factorial(${n-1}) = ${n} × ${child.value} = ${value}`,
     children: [child],
     isBaseCase: false
   };
@@ -64,14 +64,14 @@ const factorial = (n, animationStep = [], id = '0') => {
   return node;
 };
 
-// Power function with descriptive messages
+// Power function with descriptive explanation
 const power = (base, exponent, animationStep = [], id = '0') => {
   if (exponent === 0) {
     const node = {
       id,
       name: `power(${base}, 0)`,
       value: 1,
-      explanation: `Base case: Any number raised to ${exponent} equals 1`,
+      explanation: `Base case: any number raised to 0 equals 1`,
       children: [],
       isBaseCase: true
     };
@@ -85,8 +85,8 @@ const power = (base, exponent, animationStep = [], id = '0') => {
   const node = {
     id,
     name: `power(${base}, ${exponent})`,
-    value: value,
-    explanation: `${base}^${exponent} = ${base} × ${base}^${exponent-1} = ${base} × ${child.value} = ${value}`,
+    value,
+    explanation: `Recursive step: ${base}^${exponent} = ${base} × ${base}^${exponent-1} = ${base} × ${child.value} = ${value}`,
     children: [child],
     isBaseCase: false
   };
@@ -95,14 +95,14 @@ const power = (base, exponent, animationStep = [], id = '0') => {
   return node;
 };
 
-// GCD implementation with descriptive messages
+// GCD with descriptive explanation
 const gcd = (a, b, animationStep = [], id = '0') => {
   if (b === 0) {
     const node = {
       id,
       name: `gcd(${a}, ${b})`,
       value: a,
-      explanation: `Base case: When second number is 0, GCD is ${a}`,
+      explanation: `Base case: since b = 0, GCD is ${a}`,
       children: [],
       isBaseCase: true
     };
@@ -116,7 +116,7 @@ const gcd = (a, b, animationStep = [], id = '0') => {
     id,
     name: `gcd(${a}, ${b})`,
     value: child.value,
-    explanation: `GCD(${a}, ${b}) = GCD(${b}, ${a % b}) = ${child.value}`,
+    explanation: `Recursive step: gcd(${a}, ${b}) = gcd(${b}, ${a % b}) = ${child.value}`,
     children: [child],
     isBaseCase: false
   };
@@ -124,16 +124,15 @@ const gcd = (a, b, animationStep = [], id = '0') => {
   animationStep.push(node);
   return node;
 };
-// Binary Search with descriptive messages
+
+// Binary Search with descriptive explanation
 const binarySearch = (target, left, right, animationStep = [], id = '0') => {
-  const mid = Math.floor((left + right) / 2);
-  
   if (left > right) {
     const node = {
       id,
       name: `search(${target}, ${left}, ${right})`,
       value: -1,
-      explanation: `Target ${target} not found in range [${left}, ${right}]`,
+      explanation: `Base case: range [${left}, ${right}] is invalid → target not found`,
       children: [],
       isBaseCase: true
     };
@@ -141,12 +140,14 @@ const binarySearch = (target, left, right, animationStep = [], id = '0') => {
     return node;
   }
 
+  const mid = Math.floor((left + right) / 2);
+
   if (mid === target) {
     const node = {
       id,
       name: `search(${target}, ${left}, ${right})`,
       value: mid,
-      explanation: `Found target ${target} at position ${mid}`,
+      explanation: `Target found at index ${mid}`,
       children: [],
       isBaseCase: true
     };
@@ -162,7 +163,7 @@ const binarySearch = (target, left, right, animationStep = [], id = '0') => {
     id,
     name: `search(${target}, ${left}, ${right})`,
     value: nextChild.value,
-    explanation: `Mid = ${mid}, Target = ${target}, ${target < mid ? 'Search left' : 'Search right'}`,
+    explanation: `Check mid = ${mid}. Target ${target} is ${target < mid ? 'less' : 'greater'}, so search ${target < mid ? 'left' : 'right'} half`,
     children: [nextChild],
     isBaseCase: false
   };
@@ -171,14 +172,14 @@ const binarySearch = (target, left, right, animationStep = [], id = '0') => {
   return node;
 };
 
-// ArraySum implementation
+// Array Sum with descriptive explanation
 const arraySum = (arr, index = 0, animationStep = [], id = '0') => {
-  // Base case: reached end of array
   if (index === arr.length) {
     const node = {
       id,
-      name: `arraySum([${arr.join(',')}], ${index}) = 0`,
+      name: `arraySum([${arr.join(',')}], ${index})`,
       value: 0,
+      explanation: `Base case: reached end of array → sum = 0`,
       children: [],
       isBaseCase: true
     };
@@ -186,14 +187,14 @@ const arraySum = (arr, index = 0, animationStep = [], id = '0') => {
     return node;
   }
 
-  // Recursive case
   const child = arraySum(arr, index + 1, animationStep, `${id}-0`);
   const value = arr[index] + child.value;
   
   const node = {
     id,
-    name: `arraySum([${arr.join(',')}], ${index}) = ${value}`,
-    value: value,
+    name: `arraySum([${arr.join(',')}], ${index})`,
+    value,
+    explanation: `Recursive step: sum from index ${index} = arr[${index}] + sum(rest) = ${arr[index]} + ${child.value} = ${value}`,
     children: [child],
     isBaseCase: false
   };
@@ -202,14 +203,14 @@ const arraySum = (arr, index = 0, animationStep = [], id = '0') => {
   return node;
 };
 
-// Tower of Hanoi with descriptive messages
+// Tower of Hanoi with descriptive explanation
 const towerOfHanoi = (n, source = 'A', auxiliary = 'B', target = 'C', animationStep = [], id = '0') => {
   if (n === 1) {
     const node = {
       id,
       name: `hanoi(${n})`,
       value: `Move disk 1: ${source} → ${target}`,
-      explanation: `Move smallest disk from ${source} to ${target}`,
+      explanation: `Base case: Move disk 1 directly from ${source} to ${target}`,
       children: [],
       isBaseCase: true
     };
@@ -231,8 +232,8 @@ const towerOfHanoi = (n, source = 'A', auxiliary = 'B', target = 'C', animationS
   const node = {
     id,
     name: `hanoi(${n})`,
-    value: `Move ${n} disks: ${source} → ${target}`,
-    explanation: `1. Move ${n-1} disks from ${source} to ${auxiliary} 2. Move disk ${n} from ${source} to ${target} 3. Move ${n-1} disks from ${auxiliary} to ${target}`,
+    value: `Solve ${n} disks: ${source} → ${target}`,
+    explanation: `Recursive step: 1) Move ${n-1} disks from ${source} to ${auxiliary}, 2) Move disk ${n} from ${source} to ${target}, 3) Move ${n-1} disks from ${auxiliary} to ${target}`,
     children: [child1, moveCurrentDisk, child2],
     isBaseCase: false
   };
