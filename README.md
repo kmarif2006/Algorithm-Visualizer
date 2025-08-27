@@ -2,8 +2,6 @@
 
 Welcome to **Algorithm Visualizer**! This comprehensive platform combines multiple visualization tools to help you understand both recursive and sorting algorithms through interactive visual representations. Whether you're learning about recursive function calls or comparing different sorting methods, this platform provides an intuitive way to grasp these fundamental computer science concepts.
 
-🔗 **Live Demo**: [https://algorithm-visualizer-g6nn.onrender.com/](https://algorithm-visualizer-g6nn.onrender.com/)
-
 ## Features
 
 ### Landing Page
